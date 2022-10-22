@@ -40,10 +40,10 @@ const Home: NextPage = () => {
             <BulletPoint content="Lancer un produit SaaS est accessible à tout le monde : comme pour apprendre à marcher, encore faut-il essayer pour de réussir !" img="/gear.png" isBold={true}/>
             <BulletPoint content="Bonne nouvelle : d'autres l'on fait avant toi !" img="/smile.png" />
 
-            <p className="m-3 w-full p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">
-              Reçois un conseil par semaine{' '}
+            <div className="m-3 w-full p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">
+              <p>Reçois un conseil par semaine</p>
               <p className="italic">(gratuitement et directement dans ta boîte mail)</p>
-            </p>
+            </div>
           </div>
         </section>
       </main>
