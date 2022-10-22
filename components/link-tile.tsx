@@ -1,16 +1,22 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import CallToAction from './call-to-action'
+
 type LinkTileProps = {
-    url: string,
     title: string,
     content: string,
-    isExternal?: boolean,
+    callToAction: JSX.Element,
+    isSoldOut?: boolean,
 }
 
-const LinkTile = ({ url, title, content, isExternal = false }: LinkTileProps) => {
+const LinkTile = ({ title, content, callToAction, isSoldOut = false }: LinkTileProps) => {
     return (
-        <a href={url} target={isExternal ? "_blank" : ""} className="m-3 w-96 grow rounded-xl border p-6 text-left hover:text-orange-600 focus:text-orange-600 shadow">
-            <h2 className="text-2xl font-bold">{title} &rarr;</h2>
+        <div className="flex flex-col m-3 w-96 justify-between rounded-xl border p-6 text-left shadow">
+            <h2 className="text-2xl font-bold">{title}</h2 >
+            {isSoldOut && <div className="flex flex-row items-center space-x-6 mt-2"><img className="" src="/soldout.png" width={80}/><span>Actuellement victime de son succès</span></div>}
             <p className="mt-4 text-xl">{content}</p>
-        </a>
+            {callToAction}
+        </div>
     )
 }
 
