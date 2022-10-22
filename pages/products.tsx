@@ -42,7 +42,7 @@ const Product: NextPage = () => {
             />
 
             <LinkTile 
-                url=""
+                url="https://calendly.com/microsaasmaker/echange-decouverte"
                 isExternal={true} 
                 title="Coaching" 
                 content="Besoin de quelqu'un pour te guider dans l'atteinte de tes objectifs ? Tu veux lancer ton SaaS sans savoir par où t'y prendre ?"
