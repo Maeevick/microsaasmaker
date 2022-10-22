@@ -1,89 +1,54 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import Footer from '../components/footer'
+import Header from '../components/header'
+
+type BulletPointProps = {
+  img: string,
+  content: string,
+  isBold?: boolean,
+}
+
+const BulletPoint = ({ img, content, isBold = false }: BulletPointProps) => {
+  return (
+    <div className="flex m-3">
+      <div className="w-[40px] min-w-[40px] flex items-center"><img src={img} width="100%" /></div>
+      <p className={`text-left text-lg mx-3 ${isBold ? 'font-bold' : ''}`}>{content}</p>
+    </div>
+  )
+}
 
 const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
-        <title>MicroSaaS Maker</title>
+        <title>MicroSaaS Maker - Bienvenue</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a 
-            className="text-orange-600" 
-            href="https://github.com/Maeevick/microsaasmaker"
-            target="_blank">
-              MicroSaaS Maker!
-          </a>
-        </h1>
+      <Header />
 
-        <p className="mt-3 text-2xl italic">
-          Work in Progress
-        </p>
+      <main className="flex flex-1 flex-col items-center  w-full md:w-4/5 px-6 text-center">
+        <h1 className="m-6 text-xl md:text-6xl"><strong>Libère toi du travail en lançant ton <span className="text-orange-600"><em>Micro SaaS</em></span>!</strong></h1>
+        <section className="flex flex-col md:flex-row">
+          <div className="shrink max-w-sm"><img src="/myself.png" width="100%" /></div>
+          <div className="flex flex-col md:justify-center">
+            
+            <BulletPoint content="Pourquoi coder 8 heures par jour pendant 40 ans pour quelqu'un d'autre ?" img="/why.png" />
+            <BulletPoint content="Pourquoi galérer à trouver un poste plutôt que de créer ton job ?" img="/why.png" />
+            <BulletPoint content="Pourquoi réver d'avoir de l'impact dans un domaine et attendre ?" img="/why.png" />
+            <BulletPoint content="Lancer un produit SaaS est accessible à tout le monde : comme pour apprendre à marcher, encore faut-il essayer pour de réussir !" img="/gear.png" isBold={true}/>
+            <BulletPoint content="Bonne nouvelle : d'autres l'on fait avant toi !" img="/smile.png" />
 
-        <div className='border-b-orange-600 border-b h-2 w-full'></div>
-
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
+            <p className="m-3 w-full p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">
+              Reçois un conseil par semaine{' '}
+              <p className="italic">(gratuitement et directement dans ta boîte mail)</p>
             </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+          </div>
+        </section>
       </main>
 
-      <div className='border-b-orange-600 border-b h-2 w-full'></div>
-      
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+      <Footer />
     </div>
   )
 }
