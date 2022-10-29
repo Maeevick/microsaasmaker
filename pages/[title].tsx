@@ -1,23 +1,6 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    return {
-        paths: [
-            { params: { title: 'pourquoi'}},
-            { params: { title: 'quoi'}},
-            { params: { title: 'comment'}},
-        ],
-        fallback: false,
-    }
-}
-
-export const getStaticProps: GetStaticProps<{}> = async (context) => {
-    return {
-        props: {}
-      }
-}
 
 export type WipPageProps = {
     fallback?: string,
@@ -39,7 +22,7 @@ const Wip: NextPage = ({ fallback }: WipPageProps) => {
                 <p className="text-2xl">🚧</p>
             </div>
             <Link href={{ pathname: '/[title]', query: { title }}}>
-                <a className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">Je veux être informé quand c'est prêt !</a>
+                <span className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">Je veux être informé quand c'est prêt !</span>
             </Link>
         </div>
     )

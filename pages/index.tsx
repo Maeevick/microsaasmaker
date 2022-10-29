@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import CallToAction from '../components/call-to-action'
 
 type BulletPointProps = {
@@ -33,7 +34,9 @@ const Home: NextPage = () => {
           <BulletPoint content="Pourquoi réver d'avoir de l'impact dans un domaine et attendre ?" img="/why.png" />
           <BulletPoint content="Lancer un produit SaaS est accessible à tout le monde : comme pour apprendre à marcher, encore faut-il essayer pour de réussir !" img="/gear.png" isBold={true} />
           <BulletPoint content="Bonne nouvelle : d'autres l'on fait avant toi !" img="/smile.png" />
-          <CallToAction content="Reçois un conseil par semaine (gratuitement et directement dans ta boîte mail)" />
+          <Link href="">
+                <span className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">Reçois un conseil par semaine (gratuitement et directement dans ta boîte mail)</span>
+          </Link>
         </div>
       </section>
     </>
