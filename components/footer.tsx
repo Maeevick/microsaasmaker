@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const Footer = () => {
     return (
-        <footer className="flex mt-6 h-24 w-full items-center justify-center border-t-2 border-t-orange-600">
+        <footer className="flex mt-6 h-24 w-full md:w-4/5 items-center justify-center border-t-2 border-t-orange-600">
         <a
           className="flex items-center justify-center gap-2"
           href="https://github.com/Maeevick/microsaasmaker"
