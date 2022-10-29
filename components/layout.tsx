@@ -11,7 +11,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center">
             <Head>
-                <title>MicroSaaS Maker - Bienvenue</title>
+                <title>MicroSaaS Maker</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Header />
