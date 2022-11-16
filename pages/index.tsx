@@ -23,7 +23,7 @@ const CallToAction = () => {
   return (
     <button className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center">
       <Link href="">
-        Reçois un conseil par semaine (gratuitement et directement dans ta boîte mail)
+        Je veux être informé quand c'est prêt !
       </Link>
     </button>
   )
