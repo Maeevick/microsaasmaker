@@ -12,7 +12,7 @@ const BulletPoint = ({ img, content, isBold = false }: BulletPointProps) => {
   return (
     <div className="flex m-3">
       <div className="w-[40px] min-w-[40px] flex items-center">
-        <Image src={img} width={40} height={40} />
+        <Image src={img} width={40} height={40} alt=""/>
       </div>
       <p className={`text-left text-lg mx-3 ${isBold ? 'font-bold' : ''}`}>{content}</p>
     </div>
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
       <h1 className="m-6 text-xl md:text-6xl"><strong>Libère toi du travail en lançant ton <span className="text-orange-600"><em>Micro SaaS</em></span>!</strong></h1>
       <section className="flex flex-col md:flex-row">
         <div className="shrink max-w-sm">
-          <Image src="/myself.png" width={400} height={400} />
+          <Image src="/myself.png" width={400} height={400}  alt=""/>
         </div>
         <div className="flex flex-col md:justify-center">
           <BulletPoint content="Pourquoi coder 8 heures par jour pendant 40 ans pour quelqu'un d'autre ?" img="/why.png" />
