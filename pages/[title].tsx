@@ -31,7 +31,7 @@ const Wip: NextPage = ({ fallback }: WipPageProps) => {
         <div className="w-full md:w-4/5 flex flex-col items-center m-6">
             <h1 className="text-4xl">
                 <span className="italic">Bientôt disponible : </span>
-                <strong>"{`${title[0].toUpperCase()}${title.slice(1)}`} ?"</strong>
+                <strong>"{`${title && title[0].toUpperCase()}${title.slice(1)}`} ?"</strong>
             </h1>
             <div className="flex flex-row my-6 items-center">
                 <p className="text-2xl">🚧</p>
