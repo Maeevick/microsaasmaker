@@ -39,7 +39,7 @@ const Wip: NextPage = ({ fallback }: WipPageProps) => {
                 <p className="text-2xl">🚧</p>
             </div>
 
-            <CallToAction query={query} />
+            {/*<CallToAction query={query} />*/}
         </div>
     )
 }
