@@ -2,91 +2,9 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import React from 'react'
+import BulletPoint from '../components/bullet-point'
+import CallToAction from '../components/call-to-action/subscribe'
 
-type BulletPointProps = {
-  img: string,
-  content: string,
-  isBold?: boolean,
-}
-
-const BulletPoint = ({ img, content, isBold = false }: BulletPointProps) => {
-  return (
-    <div className="flex m-3">
-      <div className="w-[40px] min-w-[40px] flex items-center">
-        <Image src={img} width={40} height={40} alt="" />
-      </div>
-      <p className={`text-left text-lg mx-3 ${isBold ? 'font-bold' : ''}`}>{content}</p>
-    </div>
-  )
-}
-
-type EMailFormTarget = {
-  firstname: { value : string },
-  email: { value : string },
-}
-
-const CallToAction = () => {
-  const [showModal, setShowModal] = React.useState(false);
-  
-  const handleOpen = () => setShowModal(true)
-  const handleClose = () => setShowModal(false)
-
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault()
-
-    const target = event.target as typeof event.target & EMailFormTarget
-
-    const response = await fetch('/api/email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstname: target.firstname.value,
-        email: target.email.value,
-      }),
-    })
-    const result = await response.json()
-    
-    handleClose()
-  }
-
-  return (
-    <>
-      <button className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="button" onClick={handleOpen}>
-        Je veux être informé quand c'est prêt !
-      </button>
-      {showModal ? (
-        <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                  <p className="text-xl font-semibold grow text-start">Le lancement approche, rester informé&#183;e !</p>
-                  <button className="bg-transparent border-0 text-black leading-none font-semibold" onClick={handleClose}>
-                    <span className="text-xl text-orange-600">×</span>
-                  </button>
-                </div>
-                <div className="relative p-6 flex-auto">
-                <form onSubmit={handleSubmit}>
-                  <div className="flex justify-end items-center ">
-                  <label htmlFor="firstname">ton prénom /pseudo :</label>
-                  <input className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
-                  </div>
-                  <div className="flex justify-end items-center ">
-                  <label htmlFor="email">ton email de contact :</label>
-                  <input className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="email" name="email" />
-                  </div>
-                  <button className="m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="submit">Valider</button>
-                </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : null}
-    </>
-  )
-}
 
 const Home: NextPage = () => {
   return (
@@ -102,6 +20,7 @@ const Home: NextPage = () => {
           <BulletPoint content="Pourquoi réver d'avoir de l'impact dans un domaine et attendre ?" img="/why.png" />
           <BulletPoint content="Lancer un produit SaaS est accessible à tout le monde : comme pour apprendre à marcher, encore faut-il essayer pour de réussir !" img="/gear.png" isBold={true} />
           <BulletPoint content="Bonne nouvelle : d'autres l'on fait avant toi !" img="/smile.png" />
+          
           <CallToAction />
         </div>
       </section>
