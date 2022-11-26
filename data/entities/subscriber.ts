@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 
+
 @Entity()
 export class Subscriber {
     @PrimaryGeneratedColumn()
@@ -8,6 +9,6 @@ export class Subscriber {
     @Column("text")
     name!: string
 
-    @Column("text")
+    @Column({type: "text", unique: true})
     email!: string
 }

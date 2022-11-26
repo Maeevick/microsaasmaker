@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import "reflect-metadata"
 import type { AppProps } from 'next/app'
 
 import Layout from '../components/layout'
