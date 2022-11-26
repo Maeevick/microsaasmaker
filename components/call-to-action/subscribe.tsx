@@ -49,7 +49,7 @@ const CallToAction = () => {
                                     <form onSubmit={handleSubmit}>
                                         <div className="flex justify-end items-center ">
                                             <label htmlFor="firstname">ton prénom / pseudo :</label>
-                                            <input required placeholder="maeevick" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
+                                            <input required placeholder="prénom / pseudo" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
                                         </div>
                                         <div className="flex justify-end items-center ">
                                             <label htmlFor="email">ton email de contact :</label>
