@@ -24,7 +24,6 @@ const CallToAction = () => {
                 email: target.email.value,
             }),
         })
-        const result = await response.json()
 
         handleClose()
     }
@@ -32,7 +31,7 @@ const CallToAction = () => {
     return (
         <>
             <button className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="button" onClick={handleOpen}>
-                Je veux être informé&#183;e quand c'est prêt !
+                <span className="text-lg">Abonne-toi à la Newsletter !</span>
             </button>
             {showModal && (
                 <>
@@ -40,23 +39,24 @@ const CallToAction = () => {
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                                    <p className="text-xl font-semibold grow text-start">Le lancement approche !</p>
-                                    <button className="bg-transparent border-0 text-black leading-none font-semibold" onClick={handleClose}>
+                                    <p className="text-2xl font-semibold grow text-start">La newsletter exclusive qui accompagne la chaîne Youtube.</p>
+                                    <button className="ml-6 bg-transparent border-0 text-black leading-none font-semibold" onClick={handleClose}>
                                         <span className="text-xl text-orange-600">×</span>
                                     </button>
                                 </div>
-                                <div className="relative p-6 flex-auto">
+                                <div className="relative p-6 flex-col">
+                                    <p className="font-bold text-start">Reçois un mail par semaine, avec tout ce qu'il faut pour lancer ton MicroSaaS :</p>
+                                    <p className="text-start">... de la tech, du produit, du business, l'essentiel et l'indispensable pour gagner ta liberté.</p>
                                     <form onSubmit={handleSubmit}>
-                                        <div className="flex justify-end items-center ">
-                                            <label htmlFor="firstname">ton prénom / pseudo :</label>
-                                            <input required placeholder="prénom / pseudo" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
+                                        <div className="flex justify-around m-3">
+                                            <input required placeholder="ton prénom / pseudo" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
+                                            <input required placeholder="ton email" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="email" name="email" pattern="^.+@.+\.\w+$" />
+                                            <button className="m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="submit">Valider</button>
                                         </div>
-                                        <div className="flex justify-end items-center ">
-                                            <label htmlFor="email">ton email de contact :</label>
-                                            <input required placeholder="email@domain.ext" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="email" name="email" pattern="^.+@.+\.\w+$" />
-                                        </div>
-                                        <button className="m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="submit">Valider</button>
                                     </form>
+                                </div>
+                                <div className="flex justify-center p-2 border-t border-solid border-slate-200 rounded-t">
+                                    <p className="italic">&#9888; Ton mail ne sera jamais partagé avec personne &#9888;</p>
                                 </div>
                             </div>
                         </div>

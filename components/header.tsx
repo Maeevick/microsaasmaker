@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const HomeTitle = () => {
     return (
-        <p className="text-4xl font-bold md:whitespace-nowrap w-full">
+        <p className="text-2xl font-bold md:whitespace-nowrap w-full">
             <Link href="/">MicroSaaS Maker!</Link>
         </p>
     )
@@ -11,10 +11,10 @@ const HomeTitle = () => {
 const NavBar = () => {
     return (
         <nav className="w-full flex space-x-3 justify-center text-[0.8rem] md:text-base">
-            <Link href={{ pathname: '/[title]', query: { title: 'pourquoi' } }} className="my-1 p-2 text-center text-orange-600 border border-orange-600 rounded-xl hover:text-black hover:bg-orange-600 shadow">Pourquoi</Link>
-            <Link href={{ pathname: '/[title]', query: { title: 'quoi' } }} className="my-1 p-2 text-center text-orange-600 border border-orange-600 rounded-xl hover:text-black hover:bg-orange-600 shadow">Quoi</Link>
-            <Link href={{ pathname: '/[title]', query: { title: 'comment' } }} className="my-1 p-2 text-center text-orange-600 border border-orange-600 rounded-xl hover:text-black hover:bg-orange-600 shadow">Comment</Link>
-            <a className="my-1 p-2 text-center text-orange-600 border border-orange-600 rounded-xl hover:text-black hover:bg-orange-600 shadow" href="https://www.youtube.com/channel/UCmCyGWHYIjGBdRdDigT2Erg" target="_blank">Chaîne Youtube</a>
+            <Link href={{ pathname: '/[title]', query: { title: 'pourquoi' } }} className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">Pourquoi</Link>
+            <Link href={{ pathname: '/[title]', query: { title: 'quoi' } }} className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">Quoi</Link>
+            <Link href={{ pathname: '/[title]', query: { title: 'comment' } }} className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">Comment</Link>
+            <a className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600" href="https://www.youtube.com/channel/UCmCyGWHYIjGBdRdDigT2Erg" target="_blank">Chaîne Youtube</a>
         </nav>
     )
 }
