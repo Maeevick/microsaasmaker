@@ -35,7 +35,7 @@ const CallToAction = () => {
             </button>
             {showModal && (
                 <>
-                    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                    <div className="m-3 justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
@@ -48,7 +48,7 @@ const CallToAction = () => {
                                     <p className="font-bold text-start">Reçois un mail par semaine, avec tout ce qu'il faut pour lancer ton MicroSaaS :</p>
                                     <p className="text-start">... de la tech, du produit, du business, l'essentiel et l'indispensable pour gagner ta liberté.</p>
                                     <form onSubmit={handleSubmit}>
-                                        <div className="flex justify-around m-3">
+                                        <div className="flex flex-wrap justify-around m-3">
                                             <input required placeholder="ton prénom / pseudo" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
                                             <input required placeholder="ton email" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="email" name="email" pattern="^.+@.+\.\w+$" />
                                             <button className="m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="submit">Valider</button>
