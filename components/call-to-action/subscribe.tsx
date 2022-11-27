@@ -55,8 +55,9 @@ const CallToAction = () => {
                                         </div>
                                     </form>
                                 </div>
-                                <div className="flex justify-center p-2 border-t border-solid border-slate-200 rounded-t">
-                                    <p className="italic">&#9888; Ton mail ne sera jamais partagé avec personne &#9888;</p>
+                                <div className="flex-col justify-center p-2 border-t border-solid border-slate-200 rounded-t">
+                                    <p className="italic text-orange-600">... lancement janvier 2023 ...</p>
+                                    <p className="italic text-sm">&#9888; Ton mail ne sera jamais partagé avec personne &#9888;</p>
                                 </div>
                             </div>
                         </div>
