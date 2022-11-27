@@ -1,31 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { dataSource } from '../../data/connexion/data-source'
-import { Subscriber } from '../../data/entities/subscriber'
+import { subscriberGatewayFactory } from '../../gateways/subscriber'
+import { subscribeCommandHandler } from '../../handlers/subscribe'
 
 type Data = {
-  message: string,
+    message: string,
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+const subscribeEndPoint = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+    try {
+        await dataSource.initialize()
+        const gateway = await subscriberGatewayFactory(dataSource)
 
-  try {
-    await dataSource.initialize()
-    const subscriberRepository = dataSource.getRepository(Subscriber)
+        await subscribeCommandHandler({ gateway })(req.body)
 
-    const subscriber = new Subscriber()
-    subscriber.name = req.body.firstname as string
-    subscriber.email = req.body.email as string
-
-    await subscriberRepository.save(subscriber)
-
-    res.status(200).json({ message: 'ok' })
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: 'ko' })
-  } finally {
-    await dataSource.destroy()
-  }
+        res.status(200).json({ message: 'ok' })
+    } catch (error) {
+        console.error('An error occured and had been catched:\n', error)
+        res.status(500).json({ message: 'ko' })
+    } finally {
+        await dataSource.destroy()
+    }
 }
+
+export default subscribeEndPoint
