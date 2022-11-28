@@ -6,9 +6,13 @@ type EMailFormTarget = {
 }
 
 const CallToAction = () => {
-    const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false)
+    const [showOkMessage, setShowOkMessage] = React.useState(false)
 
-    const handleOpen = () => setShowModal(true)
+    const handleOpen = () => {
+        setShowOkMessage(false)
+        setShowModal(true)
+    }
     const handleClose = () => setShowModal(false)
 
     const handleSubmit = async (event: React.SyntheticEvent) => {
@@ -16,7 +20,7 @@ const CallToAction = () => {
 
         const target = event.target as typeof event.target & EMailFormTarget
 
-        const response = await fetch('/api/subscribe', {
+        await fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -25,8 +29,10 @@ const CallToAction = () => {
             }),
         })
 
-        handleClose()
+        setShowOkMessage(true)
+        setTimeout(handleClose, 2000)
     }
+
 
     return (
         <>
@@ -56,7 +62,10 @@ const CallToAction = () => {
                                     </form>
                                 </div>
                                 <div className="flex-col justify-center p-2 border-t border-solid border-slate-200 rounded-t">
-                                    <p className="italic text-orange-600">... lancement janvier 2023 ...</p>
+                                    {showOkMessage
+                                        ? <p className="italic text-green-600">...tout est ok, à bientôt dans ta boîte mail :)</p>
+                                        : <p className="italic text-orange-600">... lancement janvier 2023 ...</p>
+                                    }
                                     <p className="italic text-sm">&#9888; Ton mail ne sera jamais partagé avec personne &#9888;</p>
                                 </div>
                             </div>
