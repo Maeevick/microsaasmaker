@@ -12,7 +12,7 @@ const subscribeEndPoint = async (req: NextApiRequest, res: NextApiResponse<Data>
         await dataSource.initialize()
         const gateway = await subscriberGatewayFactory(dataSource)
 
-        await subscribeCommandHandler({ gateway })(req.body)
+        await subscribeCommandHandler(gateway)(req.body)
 
         res.status(200).json({ message: 'ok' })
     } catch (error) {

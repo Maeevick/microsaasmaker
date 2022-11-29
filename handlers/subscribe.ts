@@ -4,9 +4,8 @@ export type SubscriberData = {
 }
 
 export type SubscriberGateway = {
-    gateway: {
-        save: (data: SubscriberData) => Promise<void>
-    }
+        save: (data: SubscriberData) => Promise<void>,
+        getAll: () => Promise<SubscriberData[]>,
 }
 
 export type SubscribeCommand = {
@@ -14,9 +13,19 @@ export type SubscribeCommand = {
     email: string,
 }
 
-export const subscribeCommandHandler = ({ gateway }: SubscriberGateway) => async ({ firstname, email }: SubscribeCommand) => {
-    await gateway.save({
+export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => async ({ firstname, email }: SubscribeCommand) => {
+    const subscribers = await getAll()
+    
+    if(isAlreadySubscribed(email, subscribers)) {
+        return Error('already subscribed')
+    }
+
+    await save({
         name: firstname,
         email
     })
+}
+
+function isAlreadySubscribed(email: string, subscribers: SubscriberData[]) {
+    return subscribers.find(sub => sub.email === email)
 }
