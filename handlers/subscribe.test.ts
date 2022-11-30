@@ -1,7 +1,5 @@
 import { subscribeCommandHandler, SubscriberData } from './subscribe'
 
-
-
 describe('Subscription to Newsletter', () => {
     let fakeSubscribersPersistence: SubscriberData[]
 
