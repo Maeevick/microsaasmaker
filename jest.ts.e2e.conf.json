@@ -8,5 +8,6 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
+    "testRegex": "^.+\\.e2e.ts",
     "modulePathIgnorePatterns": [".next/"]
 }
