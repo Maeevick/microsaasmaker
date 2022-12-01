@@ -1,16 +1,19 @@
 import React from 'react'
+import { SubscribeResponse } from '../../handlers/subscribe'
 
 type EMailFormTarget = {
     firstname: { value: string },
     email: { value: string },
 }
 
+const INITIAL_MESSAGE = '... lancement janvier 2023 ...'
+
 const CallToAction = () => {
     const [showModal, setShowModal] = React.useState(false)
-    const [showOkMessage, setShowOkMessage] = React.useState(false)
+    const [apiDynamicMessage, setApiDynamicMessage] = React.useState(INITIAL_MESSAGE)
 
     const handleOpen = () => {
-        setShowOkMessage(false)
+        setApiDynamicMessage(INITIAL_MESSAGE)
         setShowModal(true)
     }
     const handleClose = () => setShowModal(false)
@@ -20,7 +23,7 @@ const CallToAction = () => {
 
         const target = event.target as typeof event.target & EMailFormTarget
 
-        await fetch('/api/subscribe', {
+        const response = await fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -28,8 +31,9 @@ const CallToAction = () => {
                 email: target.email.value,
             }),
         })
+        const json = await response.json()
 
-        setShowOkMessage(true)
+        setApiDynamicMessage(json.message)
         setTimeout(handleClose, 2000)
     }
 
@@ -45,7 +49,7 @@ const CallToAction = () => {
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                                    <p className="text-2xl font-semibold grow text-start">La newsletter exclusive qui accompagne la chaîne Youtube.</p>
+                                    <p className="text-xl font-semibold grow text-start">La Newsletter MicroSaaS Maker.</p>
                                     <button className="ml-6 bg-transparent border-0 text-black leading-none font-semibold" onClick={handleClose}>
                                         <span className="text-xl text-orange-600">×</span>
                                     </button>
@@ -62,10 +66,7 @@ const CallToAction = () => {
                                     </form>
                                 </div>
                                 <div className="flex-col justify-center p-2 border-t border-solid border-slate-200 rounded-t">
-                                    {showOkMessage
-                                        ? <p className="italic text-green-600">...tout est ok, à bientôt dans ta boîte mail :)</p>
-                                        : <p className="italic text-orange-600">... lancement janvier 2023 ...</p>
-                                    }
+                                        <p className="italic text-orange-600">{apiDynamicMessage}</p>
                                     <p className="italic text-sm">&#9888; Ton mail ne sera jamais partagé avec personne &#9888;</p>
                                 </div>
                             </div>

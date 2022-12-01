@@ -1,3 +1,4 @@
+import { ALREADY_SUBSCRIBED, EMAIL_IS_MISSING, FIRSTNAME_IS_MISSING, NEWLY_SUBSCRIBED } from '../../handlers/subscribe'
 import { testClientHelper } from '../../tests/helpers/api/test-client'
 import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../tests/helpers/persistence/subscriber'
 import subscribeEndPoint from './subscribe'
@@ -13,7 +14,7 @@ describe('POST - /api/subscribe', () => {
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
-        expect(sut.body).toEqual({ status: 'ko', message: 'firstname is missing' })
+        expect(sut.body).toEqual({ status: 'ko', message: FIRSTNAME_IS_MISSING })
     })
 
     test(`when the user's email is missing, then he/she is notified`, async () => {
@@ -23,7 +24,7 @@ describe('POST - /api/subscribe', () => {
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
-        expect(sut.body).toEqual({ status: 'ko', message: 'email is missing' })
+        expect(sut.body).toEqual({ status: 'ko', message: EMAIL_IS_MISSING })
     })
 
     test('when the user is already subscribed, then he/she is notified', async () => {
@@ -35,7 +36,7 @@ describe('POST - /api/subscribe', () => {
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
-        expect(sut.body).toEqual({ status: 'ko', message: 'already subscribed' })
+        expect(sut.body).toEqual({ status: 'ok', message: ALREADY_SUBSCRIBED })
     })
 
     test('when the user subscribes successfully, then he/she is notified', async () => {
@@ -45,6 +46,6 @@ describe('POST - /api/subscribe', () => {
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
-        expect(sut.body).toEqual({ status: 'ok' })
+        expect(sut.body).toEqual({ status: 'ok', message: NEWLY_SUBSCRIBED })
     })
 })

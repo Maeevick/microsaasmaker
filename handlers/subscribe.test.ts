@@ -1,4 +1,4 @@
-import { subscribeCommandHandler, SubscriberData } from './subscribe'
+import { ALREADY_SUBSCRIBED, EMAIL_IS_MISSING, FIRSTNAME_IS_MISSING, NEWLY_SUBSCRIBED, subscribeCommandHandler, SubscriberData } from './subscribe'
 
 describe('Subscription to Newsletter', () => {
     let fakeSubscribersPersistence: SubscriberData[]
@@ -19,7 +19,7 @@ describe('Subscription to Newsletter', () => {
 
         const sut = await subscribeCommandHandler(fakeSubscriberGateway)(fakeSubscriber)
 
-        expect(sut).toEqual({ status: 'ok' })
+        expect(sut).toEqual({ status: 'ok', message: NEWLY_SUBSCRIBED })
         expect(fakeSubscribersPersistence).toEqual([{ name: 'Maeevick', email: 'some_email@domain.ext' }]);
     })
 
@@ -29,7 +29,7 @@ describe('Subscription to Newsletter', () => {
 
         const sut = await subscribeCommandHandler(fakeSubscriberGateway)(fakeSubscriber)
 
-        expect(sut).toEqual({ status: 'ko', message: 'already subscribed' })
+        expect(sut).toEqual({ status: 'ok', message: ALREADY_SUBSCRIBED })
         expect(fakeSubscribersPersistence).toEqual([{ name: 'Aurel', email: 'some_email@domain.ext' }])
     })
 
@@ -39,7 +39,7 @@ describe('Subscription to Newsletter', () => {
 
         const sut = await subscribeCommandHandler(fakeSubscriberGateway)(fakeSubscriber)
 
-        expect(sut).toEqual({ status: 'ko', message: 'firstname is missing' })
+        expect(sut).toEqual({ status: 'ko', message: FIRSTNAME_IS_MISSING })
         expect(fakeSubscribersPersistence).toEqual([{ name: 'Aurel', email: 'some_email@domain.ext' }])
     })
 
@@ -49,7 +49,7 @@ describe('Subscription to Newsletter', () => {
 
         const sut = await subscribeCommandHandler(fakeSubscriberGateway)(fakeSubscriber)
 
-        expect(sut).toEqual({ status: 'ko', message: 'email is missing' })
+        expect(sut).toEqual({ status: 'ko', message: EMAIL_IS_MISSING })
         expect(fakeSubscribersPersistence).toEqual([{ name: 'Aurel', email: 'some_email@domain.ext' }])
     })
 })

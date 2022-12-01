@@ -1,3 +1,11 @@
+
+export const FIRSTNAME_IS_MISSING = 'pseudo manquant !'
+export const EMAIL_IS_MISSING = 'email manquant !'
+export const ALREADY_SUBSCRIBED = 'tu es déjà membre, à bientôt dans ta boîte mail !'
+export const NEWLY_SUBSCRIBED = 'tout est ok, à bientôt dans ta boîte mail !'
+export type SubscribeKoMessage = typeof FIRSTNAME_IS_MISSING | typeof EMAIL_IS_MISSING
+export type SubscribeOkMessage = typeof NEWLY_SUBSCRIBED | typeof ALREADY_SUBSCRIBED
+
 export type SubscriberData = {
     name: string,
     email: string,
@@ -15,30 +23,30 @@ export type SubscribeCommand = {
 
 export type SubscribeResponse = {
     status: 'ok' | 'ko',
-    message?: string,
+    message: SubscribeOkMessage | SubscribeKoMessage,
 }
 
 export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => async ({ firstname, email }: SubscribeCommand): Promise<SubscribeResponse> => {
-    if (isFirstnameMissing(firstname)) return makeKoResponseWith('firstname is missing')
+    if (isFirstnameMissing(firstname)) return makeKoResponseWith(FIRSTNAME_IS_MISSING)
 
-    if (isEmailMissing(email)) return makeKoResponseWith('email is missing')
+    if (isEmailMissing(email)) return makeKoResponseWith(EMAIL_IS_MISSING)
 
     const subscribers = await getAll()
-    if (isAlreadySubscribed(email, subscribers)) return makeKoResponseWith('already subscribed')
+    if (isAlreadySubscribed(email, subscribers)) return makeOkResponseWith(ALREADY_SUBSCRIBED)
 
     await save({
         name: firstname,
         email
     })
 
-    return makeOkResponse()
+    return makeOkResponseWith(NEWLY_SUBSCRIBED)
 }
 
-function makeOkResponse(message?: string): SubscribeResponse {
+function makeOkResponseWith(message: SubscribeOkMessage): SubscribeResponse {
     return { status: 'ok', message }
 }
 
-function makeKoResponseWith(message: string): SubscribeResponse {
+function makeKoResponseWith(message: SubscribeKoMessage): SubscribeResponse {
     return { status: 'ko', message }
 }
 
