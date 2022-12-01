@@ -1,4 +1,4 @@
-import { ALREADY_SUBSCRIBED, EMAIL_IS_MISSING, FIRSTNAME_IS_MISSING, NEWLY_SUBSCRIBED } from '../../handlers/subscribe'
+import { FIRSTNAME_IS_MISSING, EMAIL_IS_MISSING, ALREADY_SUBSCRIBED, NEWLY_SUBSCRIBED } from '../../constants/subscribe'
 import { testClientHelper } from '../../tests/helpers/api/test-client'
 import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../tests/helpers/persistence/subscriber'
 import subscribeEndPoint from './subscribe'
@@ -28,7 +28,7 @@ describe('POST - /api/subscribe', () => {
     })
 
     test('when the user is already subscribed, then he/she is notified', async () => {
-        await initSubscribersInDBWith({ name: 'maeevick', email: 'some_email@domain.ext' })
+        await initSubscribersInDBWith({ nickname: 'maeevick', email: 'some_email@domain.ext' })
 
         const sut = await testClientHelper(subscribeEndPoint)
             .post('/api/subscribe')

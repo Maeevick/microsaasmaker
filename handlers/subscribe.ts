@@ -8,7 +8,7 @@ import {
 } from "../constants/subscribe"
 
 export type SubscriberData = {
-    name: string,
+    nickname: string,
     email: string,
 }
 
@@ -36,7 +36,7 @@ export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => 
     if (isAlreadySubscribed(email, subscribers)) return makeOkResponseWith(ALREADY_SUBSCRIBED)
 
     await save({
-        name: nickname,
+        nickname: nickname,
         email
     })
 

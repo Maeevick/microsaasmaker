@@ -7,7 +7,7 @@ export class Subscriber {
     id!: number
 
     @Column("text")
-    name!: string
+    nickname!: string
 
     @Column({type: "text", unique: true})
     email!: string
