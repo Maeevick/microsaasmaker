@@ -1,10 +1,11 @@
-
-export const FIRSTNAME_IS_MISSING = 'pseudo manquant !'
-export const EMAIL_IS_MISSING = 'email manquant !'
-export const ALREADY_SUBSCRIBED = 'tu es déjà membre, à bientôt dans ta boîte mail !'
-export const NEWLY_SUBSCRIBED = 'tout est ok, à bientôt dans ta boîte mail !'
-export type SubscribeKoMessage = typeof FIRSTNAME_IS_MISSING | typeof EMAIL_IS_MISSING
-export type SubscribeOkMessage = typeof NEWLY_SUBSCRIBED | typeof ALREADY_SUBSCRIBED
+import { 
+    ALREADY_SUBSCRIBED,
+    EMAIL_IS_MISSING,
+    FIRSTNAME_IS_MISSING,
+    NEWLY_SUBSCRIBED,
+    SubscribeKoMessage,
+    SubscribeOkMessage
+} from "../constants/subscribe"
 
 export type SubscriberData = {
     name: string,
@@ -17,7 +18,7 @@ export type SubscriberGateway = {
 }
 
 export type SubscribeCommand = {
-    firstname: string,
+    nickname: string,
     email: string,
 }
 
@@ -26,8 +27,8 @@ export type SubscribeResponse = {
     message: SubscribeOkMessage | SubscribeKoMessage,
 }
 
-export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => async ({ firstname, email }: SubscribeCommand): Promise<SubscribeResponse> => {
-    if (isFirstnameMissing(firstname)) return makeKoResponseWith(FIRSTNAME_IS_MISSING)
+export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => async ({ nickname, email }: SubscribeCommand): Promise<SubscribeResponse> => {
+    if (isFirstnameMissing(nickname)) return makeKoResponseWith(FIRSTNAME_IS_MISSING)
 
     if (isEmailMissing(email)) return makeKoResponseWith(EMAIL_IS_MISSING)
 
@@ -35,7 +36,7 @@ export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => 
     if (isAlreadySubscribed(email, subscribers)) return makeOkResponseWith(ALREADY_SUBSCRIBED)
 
     await save({
-        name: firstname,
+        name: nickname,
         email
     })
 
@@ -50,8 +51,8 @@ function makeKoResponseWith(message: SubscribeKoMessage): SubscribeResponse {
     return { status: 'ko', message }
 }
 
-function isFirstnameMissing(firstname: string) {
-    return !firstname
+function isFirstnameMissing(nickname: string) {
+    return !nickname
 }
 
 function isEmailMissing(email: string) {

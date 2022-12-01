@@ -7,7 +7,7 @@ describe('POST - /api/subscribe', () => {
     beforeEach(async () => {
         await cleanSubscribersInDB()
     })
-    test(`when the user's firstname is missing, then he/she is notified`, async () => {
+    test(`when the user's nickname is missing, then he/she is notified`, async () => {
         const sut = await testClientHelper(subscribeEndPoint)
             .post('/api/subscribe')
             .send({ email: 'email@domain.ext' })
@@ -20,7 +20,7 @@ describe('POST - /api/subscribe', () => {
     test(`when the user's email is missing, then he/she is notified`, async () => {
         const sut = await testClientHelper(subscribeEndPoint)
             .post('/api/subscribe')
-            .send({ firstname: 'Maeevick' })
+            .send({ nickname: 'Maeevick' })
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
@@ -32,7 +32,7 @@ describe('POST - /api/subscribe', () => {
 
         const sut = await testClientHelper(subscribeEndPoint)
             .post('/api/subscribe')
-            .send({ firstname: 'maeevick', email: 'some_email@domain.ext' })
+            .send({ nickname: 'maeevick', email: 'some_email@domain.ext' })
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
@@ -42,7 +42,7 @@ describe('POST - /api/subscribe', () => {
     test('when the user subscribes successfully, then he/she is notified', async () => {
         const sut = await testClientHelper(subscribeEndPoint)
             .post('/api/subscribe')
-            .send({ firstname: 'maeevick', email: 'some_email@domain.ext' })
+            .send({ nickname: 'maeevick', email: 'some_email@domain.ext' })
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)

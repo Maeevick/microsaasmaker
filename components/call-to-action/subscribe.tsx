@@ -1,19 +1,17 @@
 import React from 'react'
-import { SubscribeResponse } from '../../handlers/subscribe'
+import { COMMING_SOON_2023 } from '../../constants/subscribe'
 
 type EMailFormTarget = {
-    firstname: { value: string },
+    nickname: { value: string },
     email: { value: string },
 }
 
-const INITIAL_MESSAGE = '... lancement janvier 2023 ...'
-
 const CallToAction = () => {
     const [showModal, setShowModal] = React.useState(false)
-    const [apiDynamicMessage, setApiDynamicMessage] = React.useState(INITIAL_MESSAGE)
+    const [apiDynamicMessage, setApiDynamicMessage] = React.useState(COMMING_SOON_2023)
 
     const handleOpen = () => {
-        setApiDynamicMessage(INITIAL_MESSAGE)
+        setApiDynamicMessage(COMMING_SOON_2023)
         setShowModal(true)
     }
     const handleClose = () => setShowModal(false)
@@ -27,7 +25,7 @@ const CallToAction = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                firstname: target.firstname.value,
+                nickname: target.nickname.value,
                 email: target.email.value,
             }),
         })
@@ -36,7 +34,6 @@ const CallToAction = () => {
         setApiDynamicMessage(json.message)
         setTimeout(handleClose, 2000)
     }
-
 
     return (
         <>
@@ -59,14 +56,14 @@ const CallToAction = () => {
                                     <p className="text-start">... de la tech, du produit, du business, l'essentiel et l'indispensable pour gagner ta liberté.</p>
                                     <form onSubmit={handleSubmit}>
                                         <div className="flex flex-wrap justify-around m-3">
-                                            <input required placeholder="ton prénom / pseudo" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="firstname" name="firstname" />
+                                            <input required placeholder="ton prénom / pseudo" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="nickname" name="nickname" />
                                             <input required placeholder="ton email" className="m-3 p-2 border border-amber-300 shadow rounded-xl" type="text" id="email" name="email" pattern="^.+@.+\.\w+$" />
                                             <button className="m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="submit">Valider</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div className="flex-col justify-center p-2 border-t border-solid border-slate-200 rounded-t">
-                                        <p className="italic text-orange-600">{apiDynamicMessage}</p>
+                                    <p className="italic text-orange-600">{apiDynamicMessage}</p>
                                     <p className="italic text-sm">&#9888; Ton mail ne sera jamais partagé avec personne &#9888;</p>
                                 </div>
                             </div>
