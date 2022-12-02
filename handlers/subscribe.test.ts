@@ -1,5 +1,11 @@
-import { NEWLY_SUBSCRIBED, ALREADY_SUBSCRIBED, FIRSTNAME_IS_MISSING, EMAIL_IS_MISSING } from "../constants/subscribe"
-import { SubscriberData, subscribeCommandHandler } from "./subscribe"
+import {
+    NEWLY_SUBSCRIBED,
+    ALREADY_SUBSCRIBED,
+    FIRSTNAME_IS_MISSING,
+    EMAIL_IS_MISSING
+} from "../constants/subscription"
+import { subscribeCommandHandler } from "./subscribe"
+import { SubscriberData } from "./subscription"
 
 
 describe('Subscription to Newsletter', () => {
@@ -10,6 +16,7 @@ describe('Subscription to Newsletter', () => {
             fakeSubscribersPersistence.push(data)
         },
         getAll: async () => fakeSubscribersPersistence,
+        remove: async () => {}
     }
 
     beforeEach(() => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { COMMING_SOON_2023 } from '../../constants/subscribe'
+import { COMMING_SOON_2023 } from '../../constants/subscription'
 
 type EMailFormTarget = {
     nickname: { value: string },

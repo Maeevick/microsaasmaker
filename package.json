@@ -5,9 +5,9 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --coverage --config ./jest.ts.conf.json",
-    "test:e2e": "jest --coverage --config ./jest.ts.e2e.conf.json",
+    "test:e2e": "jest --coverage --runInBand --config ./jest.ts.e2e.conf.json",
     "test:watch": "jest --watch --config ./jest.ts.conf.json",
-    "ci": "npm run test && npm run test:e2e"
+    "ci": "npm run test && npm run test:e2e && npm run build"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

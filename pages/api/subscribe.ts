@@ -1,14 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { UNKNOWN_ERROR } from '../../constants/subscribe'
 import { dataSource } from '../../data/connexion/data-source'
 import { subscriberGatewayFactory } from '../../gateways/subscriber'
-import { subscribeCommandHandler, SubscribeResponse } from '../../handlers/subscribe'
+import { subscribeCommandHandler } from '../../handlers/subscribe'
+import { SubscriptionResponse } from '../../handlers/subscription'
+import { UNKNOWN_ERROR_RESPONSE } from '../../constants/unknown-error-response'
 
-const UNKNOWN_ERROR_RESPONSE = {
-    status: 'ko',
-    message: typeof UNKNOWN_ERROR,
-}
-type SubscribeEndPointResponse = SubscribeResponse | typeof UNKNOWN_ERROR_RESPONSE
+type SubscribeEndPointResponse = SubscriptionResponse | typeof UNKNOWN_ERROR_RESPONSE
 
 const subscribeEndPoint = async (req: NextApiRequest, res: NextApiResponse<SubscribeEndPointResponse>) => {
     try {

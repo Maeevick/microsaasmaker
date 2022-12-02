@@ -1,4 +1,9 @@
-import { FIRSTNAME_IS_MISSING, EMAIL_IS_MISSING, ALREADY_SUBSCRIBED, NEWLY_SUBSCRIBED } from '../../constants/subscribe'
+import {
+    FIRSTNAME_IS_MISSING,
+    EMAIL_IS_MISSING,
+    ALREADY_SUBSCRIBED,
+    NEWLY_SUBSCRIBED
+} from '../../constants/subscription'
 import { testClientHelper } from '../../tests/helpers/api/test-client'
 import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../tests/helpers/persistence/subscriber'
 import subscribeEndPoint from './subscribe'

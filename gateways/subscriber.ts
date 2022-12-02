@@ -1,6 +1,6 @@
-import { DataSource } from "typeorm";
-import { SubscriberData, SubscriberGateway } from "../handlers/subscribe";
-import { Subscriber } from "../data/entities/subscriber";
+import { DataSource } from "typeorm"
+import { Subscriber } from "../data/entities/subscriber"
+import { SubscriberData, SubscriberGateway, UnsubscriberData } from "../handlers/subscription"
 
 export const subscriberGatewayFactory = (dataSource: DataSource): SubscriberGateway => {
     const repository = dataSource.getRepository(Subscriber)
@@ -13,6 +13,9 @@ export const subscriberGatewayFactory = (dataSource: DataSource): SubscriberGate
         },
         getAll: async () => {
             return repository.find()
+        },
+        remove: async ({ email }: UnsubscriberData) => {
+            await repository.delete({ email })
         }
     }
 }
