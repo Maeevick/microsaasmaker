@@ -5,8 +5,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --coverage --config ./jest.ts.conf.json",
-    "test:e2e": "jest --coverage --runInBand --config ./jest.ts.e2e.conf.json",
     "test:watch": "jest --watch --config ./jest.ts.conf.json",
+    "test:e2e": "jest --runInBand --config ./jest.ts.e2e.conf.json",
     "ci": "npm run test && npm run test:e2e"
   },
   "dependencies": {
