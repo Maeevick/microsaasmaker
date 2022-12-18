@@ -37,16 +37,16 @@ const CallToAction = () => {
 
     return (
         <>
-            <button className="block m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="button" onClick={handleOpen}>
+            <button className="block w-full m-3 p-2 bg-amber-300 border border-amber-300 hover:bg-orange-600 shadow rounded-xl font-bold text-center outline-none focus:outline-none" type="button" onClick={handleOpen}>
                 <span className="text-lg">Abonne-toi à la Newsletter !</span>
             </button>
             {showModal && (
                 <>
                     <div className="m-3 justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                        <div className="relative w-auto my-12 mx-auto max-w-3xl">
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                                    <p className="text-xl font-semibold grow text-start">La Newsletter MicroSaaS Maker.</p>
+                                <div className="flex items-start justify-between px-5 py-2 border-b border-solid border-slate-200 rounded-t">
+                                    <p className="text-xl font-semibold grow text-start">MicroSaaS Mailer.</p>
                                     <button className="ml-6 bg-transparent border-0 text-black leading-none font-semibold" onClick={handleClose}>
                                         <span className="text-xl text-orange-600">×</span>
                                     </button>
