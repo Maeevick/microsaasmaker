@@ -52,7 +52,7 @@ const CallToAction = () => {
                                     </button>
                                 </div>
                                 <div className="relative p-6 flex-col">
-                                    <p className="font-bold text-start">Reçois un mail par semaine, avec tout ce qu'il faut pour lancer ton MicroSaaS :</p>
+                                    <p className="font-bold text-start">Reçois un mail par quinzaine, avec tout ce qu'il faut pour lancer ton MicroSaaS :</p>
                                     <p className="text-start">... de la tech, du produit, du business, l'essentiel et l'indispensable pour gagner ta liberté.</p>
                                     <form onSubmit={handleSubmit}>
                                         <div className="flex flex-wrap justify-around m-3">
