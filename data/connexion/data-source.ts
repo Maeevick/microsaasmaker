@@ -17,7 +17,6 @@ export const dataSource = new DataSource({
 })
 
 function makeConfig(env: string) {
-    console.log('env', env)
     if (env !== 'production') {
         return {
             host: process.env.DB_HOST_E2E,

@@ -7,7 +7,7 @@
     "test": "jest --coverage --config ./jest.ts.conf.json",
     "test:watch": "jest --watch --config ./jest.ts.conf.json",
     "test:e2e": "jest --runInBand --config ./jest.ts.e2e.conf.json",
-    "ci": "NODE_ENV=test npm run test && npm run test:e2e"
+    "ci": "npm run test"
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.6",
