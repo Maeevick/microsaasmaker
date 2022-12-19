@@ -17,7 +17,6 @@ export const dataSource = new DataSource({
 })
 
 function makeConfig(env: string) {
-    console.log('env', process.env)
     if (env === 'CI') {
         return {
             host: process.env.DB_HOST_E2E,
