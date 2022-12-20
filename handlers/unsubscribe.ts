@@ -3,21 +3,20 @@ import {
     UNSUBSCRIBED
 } from "../constants/subscription"
 import {
-    SubscriberData,
     SubscriptionResponse,
     SubscriberGateway,
-    UnsubscribeCommand
+    UnsubscribeCommand,
 } from "./subscription"
+import { CryptoGateway } from "./crypto"
 
-export const unsubscribeCommandHandler = ({ remove, getAll }: SubscriberGateway) => async ({ email }: UnsubscribeCommand): Promise<SubscriptionResponse> => {
+export const unsubscribeCommandHandler = ({ remove, getAll }: SubscriberGateway, { decryptHexText }: CryptoGateway) => async ({ email }: UnsubscribeCommand): Promise<SubscriptionResponse> => {
     const subscribers = await getAll()
-    if(isNotSubscribed(email, subscribers)) return { status: 'ko', message: NOT_SUBSCRIBED }
-    
-    await remove({ email })
+    const target = subscribers.find(sub => decryptHexText(sub.email) === email)
+    if (!target) {
+        return { status: 'ko', message: NOT_SUBSCRIBED }
+    }
+
+    await remove({ email: target.email })
 
     return { status: 'ok', message: UNSUBSCRIBED }
-}
-
-function isNotSubscribed(email: string, subscribers: SubscriberData[]) {
-    return !subscribers.find((sub) => sub.email === email)
 }

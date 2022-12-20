@@ -10,8 +10,8 @@ export type UnsubscriberData = {
 }
 
 export type SubscriberGateway = {
-    save: (data: SubscriberData) => Promise<void>,
     getAll: () => Promise<SubscriberData[]>,
+    save: (data: SubscriberData) => Promise<void>,
     remove: (data: UnsubscriberData) => Promise<void>
 }
 

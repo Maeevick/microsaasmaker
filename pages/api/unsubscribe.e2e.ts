@@ -2,16 +2,23 @@
 import { NOT_SUBSCRIBED, UNSUBSCRIBED } from "../../constants/subscription"
 import { testClientHelper } from "../../tests/helpers/api/test-client"
 import { cleanSubscribersInDB, initSubscribersInDBWith } from "../../tests/helpers/persistence/subscriber"
+import { cryptoGatewayFactory } from "../../gateways/crypto"
 import unsubscribeEndPoint from "./unsubscribe"
 
 describe('POST - /api/unsubscribe', () => {
+    const cryptoGateway = cryptoGatewayFactory()
+
     beforeEach(async () => {
         await cleanSubscribersInDB()
     })
     test(`when the user's email exists, then he/she is notified`, async () => {
-        await initSubscribersInDBWith({ nickname: 'Maeevick0', email: 'email0@domain.ext' })
-        await initSubscribersInDBWith({ nickname: 'Maeevick1', email: 'email1@domain.ext' })
-        await initSubscribersInDBWith({ nickname: 'Maeevick2', email: 'email2@domain.ext' })
+        const email0 = cryptoGateway.encryptClearText('email0@domain.ext')
+        const email1 = cryptoGateway.encryptClearText('email1@domain.ext')
+        const email2 = cryptoGateway.encryptClearText('email2@domain.ext')
+
+        await initSubscribersInDBWith({ nickname: 'Maeevick0', email: email0})
+        await initSubscribersInDBWith({ nickname: 'Maeevick1', email: email1 })
+        await initSubscribersInDBWith({ nickname: 'Maeevick2', email: email2 })
 
         const sut = await testClientHelper(unsubscribeEndPoint)
             .delete('/api/subscribe')
@@ -23,8 +30,11 @@ describe('POST - /api/unsubscribe', () => {
     })
 
     test(`when the user's email doesn't exist, then he/she is notified`, async () => {
-        await initSubscribersInDBWith({ nickname: 'Maeevick0', email: 'email0@domain.ext' })
-        await initSubscribersInDBWith({ nickname: 'Maeevick2', email: 'email2@domain.ext' })
+        const email0 = cryptoGateway.encryptClearText('email0@domain.ext')
+        const email2 = cryptoGateway.encryptClearText('email2@domain.ext')
+
+        await initSubscribersInDBWith({ nickname: 'Maeevick0', email: email0 })
+        await initSubscribersInDBWith({ nickname: 'Maeevick2', email: email2 })
 
         const sut = await testClientHelper(unsubscribeEndPoint)
             .delete('/api/subscribe')

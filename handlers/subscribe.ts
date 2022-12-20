@@ -1,4 +1,4 @@
-import { 
+import {
     ALREADY_SUBSCRIBED,
     EMAIL_IS_MISSING,
     FIRSTNAME_IS_MISSING,
@@ -8,22 +8,24 @@ import {
 } from "../constants/subscription"
 import {
     SubscribeCommand,
-    SubscriberData,
     SubscriptionResponse,
     SubscriberGateway,
 } from "./subscription"
+import { CryptoGateway } from "./crypto"
 
-export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway) => async ({ nickname, email }: SubscribeCommand): Promise<SubscriptionResponse> => {
+export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway, { encryptClearText, decryptHexText }: CryptoGateway) => async ({ nickname, email }: SubscribeCommand): Promise<SubscriptionResponse> => {
     if (isFirstnameMissing(nickname)) return makeKoResponseWith(FIRSTNAME_IS_MISSING)
 
     if (isEmailMissing(email)) return makeKoResponseWith(EMAIL_IS_MISSING)
 
     const subscribers = await getAll()
-    if (isAlreadySubscribed(email, subscribers)) return makeOkResponseWith(ALREADY_SUBSCRIBED)
+    if (subscribers.find(sub => decryptHexText(sub.email) === email)) {
+        return makeOkResponseWith(ALREADY_SUBSCRIBED)
+    }
 
     await save({
         nickname: nickname,
-        email
+        email: encryptClearText(email),
     })
 
     return makeOkResponseWith(NEWLY_SUBSCRIBED)
@@ -35,10 +37,6 @@ function isFirstnameMissing(nickname: string) {
 
 function isEmailMissing(email: string) {
     return !email
-}
-
-function isAlreadySubscribed(email: string, subscribers: SubscriberData[]) {
-    return subscribers.find(sub => sub.email === email)
 }
 
 function makeOkResponseWith(message: SubscriptionOkMessage): SubscriptionResponse {

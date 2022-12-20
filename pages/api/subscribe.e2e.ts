@@ -6,9 +6,12 @@ import {
 } from '../../constants/subscription'
 import { testClientHelper } from '../../tests/helpers/api/test-client'
 import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../tests/helpers/persistence/subscriber'
+import { cryptoGatewayFactory } from '../../gateways/crypto'
 import subscribeEndPoint from './subscribe'
 
 describe('POST - /api/subscribe', () => {
+    const cryptoGateway = cryptoGatewayFactory()
+
     beforeEach(async () => {
         await cleanSubscribersInDB()
     })
@@ -33,11 +36,14 @@ describe('POST - /api/subscribe', () => {
     })
 
     test('when the user is already subscribed, then he/she is notified', async () => {
-        await initSubscribersInDBWith({ nickname: 'maeevick', email: 'some_email@domain.ext' })
+        const fakeAlreadySubscribedEmail = 'some_email@domain.ext'
+        const encryptedAlreadySubscribedEmail = cryptoGateway.encryptClearText(fakeAlreadySubscribedEmail)
+
+        await initSubscribersInDBWith({ nickname: 'maeevick', email: encryptedAlreadySubscribedEmail })
 
         const sut = await testClientHelper(subscribeEndPoint)
             .post('/api/subscribe')
-            .send({ nickname: 'maeevick', email: 'some_email@domain.ext' })
+            .send({ nickname: 'maeevick', email: fakeAlreadySubscribedEmail })
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
