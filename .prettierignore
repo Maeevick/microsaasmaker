@@ -1,0 +1,11 @@
+# Ignore artifacts:
+*.md
+.next
+reports
+.babelrc
+*.config.js
+*.conf.json
+tsconfig.json
+
+# Ignore all HTML files:
+*.html
