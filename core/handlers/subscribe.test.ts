@@ -1,12 +1,6 @@
-
-import {
-    NEWLY_SUBSCRIBED,
-    ALREADY_SUBSCRIBED,
-    FIRSTNAME_IS_MISSING,
-    EMAIL_IS_MISSING
-} from "../constants"
-import { CryptoGateway, SubscriberData, SubscriberGateway } from "../ports/subscription"
-import { subscribeCommandHandler } from "./subscribe"
+import { NEWLY_SUBSCRIBED, ALREADY_SUBSCRIBED, FIRSTNAME_IS_MISSING, EMAIL_IS_MISSING } from '../constants'
+import { CryptoGateway, SubscriberData, SubscriberGateway } from '../ports/subscription'
+import { subscribeCommandHandler } from './subscribe'
 
 describe('Subscription to Newsletter', () => {
     let fakeSubscribersPersistence: SubscriberData[]
@@ -16,7 +10,7 @@ describe('Subscription to Newsletter', () => {
             fakeSubscribersPersistence.push(data)
         },
         getAll: async () => fakeSubscribersPersistence,
-        remove: async () => {}
+        remove: async () => {},
     }
 
     const fakeCryptoGateway: CryptoGateway = {
@@ -25,7 +19,7 @@ describe('Subscription to Newsletter', () => {
         },
         decryptHexText: (data: string) => {
             return data.replace('encrypted_', '')
-        }
+        },
     }
 
     beforeEach(() => {
@@ -33,17 +27,23 @@ describe('Subscription to Newsletter', () => {
     })
 
     test(`when the user fills his/her nickname and email, then they are saved`, async () => {
-        const fakeSubscriber = { nickname: 'Maeevick', email: 'some_email@domain.ext' }
+        const fakeSubscriber = {
+            nickname: 'Maeevick',
+            email: 'some_email@domain.ext',
+        }
 
         const sut = await subscribeCommandHandler(fakeSubscriberGateway, fakeCryptoGateway)(fakeSubscriber)
 
         expect(sut).toEqual({ status: 'ok', message: NEWLY_SUBSCRIBED })
-        expect(fakeSubscribersPersistence).toEqual([{ nickname: 'Maeevick', email: 'encrypted_some_email@domain.ext' }]);
+        expect(fakeSubscribersPersistence).toEqual([{ nickname: 'Maeevick', email: 'encrypted_some_email@domain.ext' }])
     })
 
     test(`when the user fills nickname and an already existing email, then he/she is notified that he/she is already registered`, async () => {
         fakeSubscribersPersistence = [{ nickname: 'Aurel', email: 'encrypted_some_email@domain.ext' }]
-        const fakeSubscriber = { nickname: 'Maeevick', email: 'some_email@domain.ext' }
+        const fakeSubscriber = {
+            nickname: 'Maeevick',
+            email: 'some_email@domain.ext',
+        }
 
         const sut = await subscribeCommandHandler(fakeSubscriberGateway, fakeCryptoGateway)(fakeSubscriber)
 

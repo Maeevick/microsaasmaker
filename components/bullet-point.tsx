@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
 type BulletPointProps = {
-    img: string,
-    content: string,
-    isBold?: boolean,
+    img: string
+    content: string
+    isBold?: boolean
 }
 
 const BulletPoint = ({ img, content, isBold = false }: BulletPointProps) => {

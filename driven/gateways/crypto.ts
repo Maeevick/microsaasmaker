@@ -1,8 +1,6 @@
-
 import * as dotenv from 'dotenv'
 import { createCipheriv, createDecipheriv, randomBytes } from 'node:crypto'
 import { CryptoGateway } from '../../core/ports/subscription'
-
 
 dotenv.config()
 
@@ -27,6 +25,6 @@ export const cryptoGatewayFactory = (): CryptoGateway => {
             decrypted += decipher.final('utf8')
 
             return decrypted
-        }
+        },
     }
 }

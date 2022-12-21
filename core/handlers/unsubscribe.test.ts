@@ -1,7 +1,6 @@
-
-import { UNSUBSCRIBED, NOT_SUBSCRIBED } from "../constants"
-import { CryptoGateway, SubscriberData, SubscriberGateway, UnsubscriberData } from "../ports/subscription"
-import { unsubscribeCommandHandler } from "./unsubscribe"
+import { UNSUBSCRIBED, NOT_SUBSCRIBED } from '../constants'
+import { CryptoGateway, SubscriberData, SubscriberGateway, UnsubscriberData } from '../ports/subscription'
+import { unsubscribeCommandHandler } from './unsubscribe'
 
 describe('Subscription to Newsletter', () => {
     let fakeSubscribersPersistence: SubscriberData[]
@@ -12,9 +11,9 @@ describe('Subscription to Newsletter', () => {
         },
         getAll: async () => fakeSubscribersPersistence,
         remove: async ({ email }: UnsubscriberData) => {
-            const targetIndex = fakeSubscribersPersistence.findIndex(sub => sub.email === email)
-            if(targetIndex !== -1) fakeSubscribersPersistence.splice(targetIndex, 1)
-        }
+            const targetIndex = fakeSubscribersPersistence.findIndex((sub) => sub.email === email)
+            if (targetIndex !== -1) fakeSubscribersPersistence.splice(targetIndex, 1)
+        },
     }
 
     const fakeCryptoGateway: CryptoGateway = {
@@ -23,7 +22,7 @@ describe('Subscription to Newsletter', () => {
         },
         decryptHexText: (data: string) => {
             return data.replace('encrypted_', '')
-        }
+        },
     }
 
     beforeEach(() => {
@@ -36,7 +35,10 @@ describe('Subscription to Newsletter', () => {
             { nickname: 'Maeevick', email: 'encrypted_existing@domain.ext' },
             { nickname: 'Another', email: 'encrypted_another@test.com' },
         ]
-        const fakeSubscriber = { nickname: 'Maeevick', email: 'existing@domain.ext' }
+        const fakeSubscriber = {
+            nickname: 'Maeevick',
+            email: 'existing@domain.ext',
+        }
 
         const sut = await unsubscribeCommandHandler(fakeSubscriberGateway, fakeCryptoGateway)(fakeSubscriber)
 
@@ -44,7 +46,7 @@ describe('Subscription to Newsletter', () => {
         expect(fakeSubscribersPersistence).toEqual([
             { nickname: 'Aurel', email: 'encrypted_some_email@domain.ext' },
             { nickname: 'Another', email: 'encrypted_another@test.com' },
-        ]);
+        ])
     })
 
     test(`when the user unsubscribes without existing email, then nothing change`, async () => {
@@ -52,7 +54,10 @@ describe('Subscription to Newsletter', () => {
             { nickname: 'Aurel', email: 'encrypted_some_email@domain.ext' },
             { nickname: 'Another', email: 'encrypted_another@test.com' },
         ]
-        const fakeSubscriber = { nickname: 'Maeevick', email: 'unexisting@domain.ext' }
+        const fakeSubscriber = {
+            nickname: 'Maeevick',
+            email: 'unexisting@domain.ext',
+        }
 
         const sut = await unsubscribeCommandHandler(fakeSubscriberGateway, fakeCryptoGateway)(fakeSubscriber)
 
@@ -60,6 +65,6 @@ describe('Subscription to Newsletter', () => {
         expect(fakeSubscribersPersistence).toEqual([
             { nickname: 'Aurel', email: 'encrypted_some_email@domain.ext' },
             { nickname: 'Another', email: 'encrypted_another@test.com' },
-        ]);
+        ])
     })
 })

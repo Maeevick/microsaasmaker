@@ -11,10 +11,28 @@ const HomeTitle = () => {
 const NavBar = () => {
     return (
         <nav className="w-full flex space-x-3 justify-center text-[0.8rem] md:text-base">
-            <Link href="/why" className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">Pourquoi</Link>
-            <Link href={{ pathname: '/[title]', query: { title: 'quoi' } }} className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">Quoi</Link>
-            <Link href={{ pathname: '/[title]', query: { title: 'comment' } }} className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">Comment</Link>
-            <a className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600" href="https://www.youtube.com/@microsaasmaker" target="_blank">Chaîne Youtube</a>
+            <Link href="/why" className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600">
+                Pourquoi
+            </Link>
+            <Link
+                href={{ pathname: '/[title]', query: { title: 'quoi' } }}
+                className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600"
+            >
+                Quoi
+            </Link>
+            <Link
+                href={{ pathname: '/[title]', query: { title: 'comment' } }}
+                className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600"
+            >
+                Comment
+            </Link>
+            <a
+                className="my-1 p-2 text-center hover:text-orange-600 hover:text-orange-600"
+                href="https://www.youtube.com/@microsaasmaker"
+                target="_blank"
+            >
+                Chaîne Youtube
+            </a>
         </nav>
     )
 }

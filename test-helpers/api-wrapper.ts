@@ -1,7 +1,7 @@
-import { IncomingMessage, ServerResponse, createServer } from "http"
-import { NextApiHandler } from "next"
-import { apiResolver } from "next/dist/server/api-utils/node"
-import supertest from "supertest"
+import { IncomingMessage, ServerResponse, createServer } from 'http'
+import { NextApiHandler } from 'next'
+import { apiResolver } from 'next/dist/server/api-utils/node'
+import supertest from 'supertest'
 
 export const apiWrapper = (handler: NextApiHandler) => {
     const serverRequestListener = async (req: IncomingMessage, res: ServerResponse) => {

@@ -1,8 +1,8 @@
-import { UNSUBSCRIBED, NOT_SUBSCRIBED } from "../../core/constants"
-import { apiWrapper } from "../../test-helpers/api-wrapper"
-import { cleanSubscribersInDB, initSubscribersInDBWith } from "../../test-helpers/db-subscriber-utils"
-import { cryptoGatewayFactory } from "../../driven/gateways/crypto"
-import unsubscribeEndPoint from "./unsubscribe"
+import { UNSUBSCRIBED, NOT_SUBSCRIBED } from '../../core/constants'
+import { apiWrapper } from '../../test-helpers/api-wrapper'
+import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../test-helpers/db-subscriber-utils'
+import { cryptoGatewayFactory } from '../../driven/gateways/crypto'
+import unsubscribeEndPoint from './unsubscribe'
 
 describe('POST - /api/unsubscribe', () => {
     const cryptoGateway = cryptoGatewayFactory()
@@ -15,7 +15,7 @@ describe('POST - /api/unsubscribe', () => {
         const email1 = cryptoGateway.encryptClearText('email1@domain.ext')
         const email2 = cryptoGateway.encryptClearText('email2@domain.ext')
 
-        await initSubscribersInDBWith({ nickname: 'Maeevick0', email: email0})
+        await initSubscribersInDBWith({ nickname: 'Maeevick0', email: email0 })
         await initSubscribersInDBWith({ nickname: 'Maeevick1', email: email1 })
         await initSubscribersInDBWith({ nickname: 'Maeevick2', email: email2 })
 

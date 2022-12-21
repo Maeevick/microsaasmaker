@@ -2,14 +2,14 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 export type WipPageProps = {
-    fallback?: string,
+    fallback?: string
 }
 
 const Wip: NextPage = ({ fallback }: WipPageProps) => {
     const router = useRouter()
     const query = router.query
 
-    const title = query.title || ""
+    const title = query.title || ''
 
     return (
         <div className="w-full md:w-4/5 flex flex-col items-center m-6">
@@ -27,4 +27,3 @@ const Wip: NextPage = ({ fallback }: WipPageProps) => {
 }
 
 export default Wip
-

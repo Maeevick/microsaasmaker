@@ -17,7 +17,10 @@ describe('POST - /api/subscribe', () => {
             .set('Accept', 'application/json')
 
         expect(sut.status).toEqual(200)
-        expect(sut.body).toEqual({ status: 'ko', message: FIRSTNAME_IS_MISSING })
+        expect(sut.body).toEqual({
+            status: 'ko',
+            message: FIRSTNAME_IS_MISSING,
+        })
     })
 
     test(`when the user's email is missing, then he/she is notified`, async () => {
@@ -34,7 +37,10 @@ describe('POST - /api/subscribe', () => {
         const fakeAlreadySubscribedEmail = 'some_email@domain.ext'
         const encryptedAlreadySubscribedEmail = cryptoGateway.encryptClearText(fakeAlreadySubscribedEmail)
 
-        await initSubscribersInDBWith({ nickname: 'maeevick', email: encryptedAlreadySubscribedEmail })
+        await initSubscribersInDBWith({
+            nickname: 'maeevick',
+            email: encryptedAlreadySubscribedEmail,
+        })
 
         const sut = await apiWrapper(subscribeEndPoint)
             .post('/api/subscribe')
