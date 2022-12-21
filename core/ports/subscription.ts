@@ -1,4 +1,3 @@
-import { SubscriptionKoMessage, SubscriptionOkMessage } from '../../../constants/subscription'
 import {
     FIRSTNAME_IS_MISSING,
     EMAIL_IS_MISSING,
