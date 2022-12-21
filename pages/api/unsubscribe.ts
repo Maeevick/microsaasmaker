@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { dataSource } from "../../data/connexion/data-source"
-import { subscriberGatewayFactory } from "../../gateways/subscriber"
-import { SubscriptionResponse } from "../../handlers/subscription"
-import { unsubscribeCommandHandler } from "../../handlers/unsubscribe"
-import { UNKNOWN_ERROR_RESPONSE } from "../../constants/unknown-error-response"
-import { cryptoGatewayFactory } from "../../gateways/crypto"
+import { dataSource } from "../../driven/data/connexion/data-source"
+import { subscriberGatewayFactory } from "../../driven/gateways/subscriber"
+import { unsubscribeCommandHandler } from "../../core/handlers/unsubscribe"
+import { cryptoGatewayFactory } from "../../driven/gateways/crypto"
+import { SubscriptionResponse } from "../../core/ports/subscription"
+import { UNKNOWN_ERROR_RESPONSE } from "./constants"
 
 type UnsubscribeEndPointResponse = SubscriptionResponse | typeof UNKNOWN_ERROR_RESPONSE
 

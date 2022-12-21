@@ -1,12 +1,7 @@
-import {
-    FIRSTNAME_IS_MISSING,
-    EMAIL_IS_MISSING,
-    ALREADY_SUBSCRIBED,
-    NEWLY_SUBSCRIBED
-} from '../../constants/subscription'
-import { testClientHelper } from '../../tests/helpers/api/test-client'
-import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../tests/helpers/persistence/subscriber'
-import { cryptoGatewayFactory } from '../../gateways/crypto'
+import { FIRSTNAME_IS_MISSING, EMAIL_IS_MISSING, ALREADY_SUBSCRIBED, NEWLY_SUBSCRIBED } from '../../core/constants'
+import { apiWrapper } from '../../test-helpers/api-wrapper'
+import { cleanSubscribersInDB, initSubscribersInDBWith } from '../../test-helpers/db-subscriber-utils'
+import { cryptoGatewayFactory } from '../../driven/gateways/crypto'
 import subscribeEndPoint from './subscribe'
 
 describe('POST - /api/subscribe', () => {
@@ -16,7 +11,7 @@ describe('POST - /api/subscribe', () => {
         await cleanSubscribersInDB()
     })
     test(`when the user's nickname is missing, then he/she is notified`, async () => {
-        const sut = await testClientHelper(subscribeEndPoint)
+        const sut = await apiWrapper(subscribeEndPoint)
             .post('/api/subscribe')
             .send({ email: 'email@domain.ext' })
             .set('Accept', 'application/json')
@@ -26,7 +21,7 @@ describe('POST - /api/subscribe', () => {
     })
 
     test(`when the user's email is missing, then he/she is notified`, async () => {
-        const sut = await testClientHelper(subscribeEndPoint)
+        const sut = await apiWrapper(subscribeEndPoint)
             .post('/api/subscribe')
             .send({ nickname: 'Maeevick' })
             .set('Accept', 'application/json')
@@ -41,7 +36,7 @@ describe('POST - /api/subscribe', () => {
 
         await initSubscribersInDBWith({ nickname: 'maeevick', email: encryptedAlreadySubscribedEmail })
 
-        const sut = await testClientHelper(subscribeEndPoint)
+        const sut = await apiWrapper(subscribeEndPoint)
             .post('/api/subscribe')
             .send({ nickname: 'maeevick', email: fakeAlreadySubscribedEmail })
             .set('Accept', 'application/json')
@@ -51,7 +46,7 @@ describe('POST - /api/subscribe', () => {
     })
 
     test('when the user subscribes successfully, then he/she is notified', async () => {
-        const sut = await testClientHelper(subscribeEndPoint)
+        const sut = await apiWrapper(subscribeEndPoint)
             .post('/api/subscribe')
             .send({ nickname: 'maeevick', email: 'some_email@domain.ext' })
             .set('Accept', 'application/json')

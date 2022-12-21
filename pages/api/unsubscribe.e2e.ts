@@ -1,8 +1,7 @@
-
-import { NOT_SUBSCRIBED, UNSUBSCRIBED } from "../../constants/subscription"
-import { testClientHelper } from "../../tests/helpers/api/test-client"
-import { cleanSubscribersInDB, initSubscribersInDBWith } from "../../tests/helpers/persistence/subscriber"
-import { cryptoGatewayFactory } from "../../gateways/crypto"
+import { UNSUBSCRIBED, NOT_SUBSCRIBED } from "../../core/constants"
+import { apiWrapper } from "../../test-helpers/api-wrapper"
+import { cleanSubscribersInDB, initSubscribersInDBWith } from "../../test-helpers/db-subscriber-utils"
+import { cryptoGatewayFactory } from "../../driven/gateways/crypto"
 import unsubscribeEndPoint from "./unsubscribe"
 
 describe('POST - /api/unsubscribe', () => {
@@ -20,7 +19,7 @@ describe('POST - /api/unsubscribe', () => {
         await initSubscribersInDBWith({ nickname: 'Maeevick1', email: email1 })
         await initSubscribersInDBWith({ nickname: 'Maeevick2', email: email2 })
 
-        const sut = await testClientHelper(unsubscribeEndPoint)
+        const sut = await apiWrapper(unsubscribeEndPoint)
             .delete('/api/subscribe')
             .send({ email: 'email1@domain.ext' })
             .set('Accept', 'application/json')
@@ -36,7 +35,7 @@ describe('POST - /api/unsubscribe', () => {
         await initSubscribersInDBWith({ nickname: 'Maeevick0', email: email0 })
         await initSubscribersInDBWith({ nickname: 'Maeevick2', email: email2 })
 
-        const sut = await testClientHelper(unsubscribeEndPoint)
+        const sut = await apiWrapper(unsubscribeEndPoint)
             .delete('/api/subscribe')
             .send({ email: 'email1@domain.ext' })
             .set('Accept', 'application/json')

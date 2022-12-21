@@ -1,6 +1,6 @@
-import { NOT_SUBSCRIBED, UNSUBSCRIBED } from "../constants/subscription"
-import { CryptoGateway } from "./crypto"
-import { SubscriberData, SubscriberGateway, UnsubscriberData } from "./subscription"
+
+import { UNSUBSCRIBED, NOT_SUBSCRIBED } from "../constants"
+import { CryptoGateway, SubscriberData, SubscriberGateway, UnsubscriberData } from "../ports/subscription"
 import { unsubscribeCommandHandler } from "./unsubscribe"
 
 describe('Subscription to Newsletter', () => {

@@ -3,7 +3,7 @@ import { NextApiHandler } from "next"
 import { apiResolver } from "next/dist/server/api-utils/node"
 import supertest from "supertest"
 
-export const testClientHelper = (handler: NextApiHandler) => {
+export const apiWrapper = (handler: NextApiHandler) => {
     const serverRequestListener = async (req: IncomingMessage, res: ServerResponse) => {
         const apiContext = {
             previewModeId: '',

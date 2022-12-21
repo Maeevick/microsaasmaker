@@ -1,10 +1,11 @@
 import React from 'react'
-import { COMMING_SOON_2023 } from '../../constants/subscription'
 
 type EMailFormTarget = {
     nickname: { value: string },
     email: { value: string },
 }
+
+const COMMING_SOON_2023 = `... lancement janvier 2023 ...`
 
 const CallToAction = () => {
     const [showModal, setShowModal] = React.useState(false)

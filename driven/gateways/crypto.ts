@@ -1,8 +1,8 @@
 
 import * as dotenv from 'dotenv'
 import { createCipheriv, createDecipheriv, randomBytes } from 'node:crypto'
+import { CryptoGateway } from '../../core/ports/subscription'
 
-import { CryptoGateway } from '../handlers/crypto'
 
 dotenv.config()
 

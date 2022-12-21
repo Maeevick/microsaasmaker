@@ -1,17 +1,18 @@
-import {
+import { 
     ALREADY_SUBSCRIBED,
     EMAIL_IS_MISSING,
     FIRSTNAME_IS_MISSING,
     NEWLY_SUBSCRIBED,
-    SubscriptionKoMessage,
-    SubscriptionOkMessage
-} from "../constants/subscription"
+} from "../constants"
+
 import {
     SubscribeCommand,
     SubscriptionResponse,
     SubscriberGateway,
-} from "./subscription"
-import { CryptoGateway } from "./crypto"
+    CryptoGateway,
+    SubscriptionKoMessage,
+    SubscriptionOkMessage,
+} from "../ports/subscription"
 
 export const subscribeCommandHandler = ({ save, getAll }: SubscriberGateway, { encryptClearText, decryptHexText }: CryptoGateway) => async ({ nickname, email }: SubscribeCommand): Promise<SubscriptionResponse> => {
     if (isFirstnameMissing(nickname)) return makeKoResponseWith(FIRSTNAME_IS_MISSING)

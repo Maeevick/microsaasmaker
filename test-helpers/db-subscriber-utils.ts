@@ -1,6 +1,6 @@
-import { dataSource } from "../../../data/connexion/data-source"
-import { Subscriber } from "../../../data/entities/subscriber"
-import { SubscriberData } from "../../../handlers/subscription"
+import { dataSource } from "../driven/data/connexion/data-source"
+import { Subscriber } from "../driven/data/entities/subscriber"
+import { SubscriberData } from "../core/ports/subscription"
 
 export const cleanSubscribersInDB = async () => {
     await dataSource.initialize()

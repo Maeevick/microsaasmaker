@@ -1,11 +1,11 @@
+
 import {
     NEWLY_SUBSCRIBED,
     ALREADY_SUBSCRIBED,
     FIRSTNAME_IS_MISSING,
     EMAIL_IS_MISSING
-} from "../constants/subscription"
-import { CryptoGateway } from "./crypto"
-import { SubscriberData, SubscriberGateway } from "./subscription"
+} from "../constants"
+import { CryptoGateway, SubscriberData, SubscriberGateway } from "../ports/subscription"
 import { subscribeCommandHandler } from "./subscribe"
 
 describe('Subscription to Newsletter', () => {

@@ -1,13 +1,11 @@
-import {
-    NOT_SUBSCRIBED,
-    UNSUBSCRIBED
-} from "../constants/subscription"
+
+import { NOT_SUBSCRIBED, UNSUBSCRIBED } from "../constants"
 import {
     SubscriptionResponse,
     SubscriberGateway,
     UnsubscribeCommand,
-} from "./subscription"
-import { CryptoGateway } from "./crypto"
+    CryptoGateway,
+} from "../ports/subscription"
 
 export const unsubscribeCommandHandler = ({ remove, getAll }: SubscriberGateway, { decryptHexText }: CryptoGateway) => async ({ email }: UnsubscribeCommand): Promise<SubscriptionResponse> => {
     const subscribers = await getAll()
