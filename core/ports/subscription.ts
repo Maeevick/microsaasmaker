@@ -27,6 +27,10 @@ export type CryptoGateway = {
     decryptHexText: (data: string) => string
 }
 
+export type EmailGateway = {
+    sendWelcomeMessageTo: ({email, nickname }: SubscriberData) => Promise<void>
+}
+
 export type SubscribeCommand = {
     nickname: string
     email: string

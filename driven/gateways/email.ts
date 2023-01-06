@@ -1,4 +1,6 @@
 import Mailjet from 'node-mailjet'
+import { welcomeEmailFactory } from '../../core/domain/welcome-email'
+import { SubscriberData } from '../../core/ports/subscription'
 
 const API_KEY = process.env.MAILJET_API_KEY as string
 const SECRET_KEY = process.env.MAILJET_SECRET_KEY as string
@@ -6,15 +8,12 @@ const SENDER_EMAIL = process.env.MAILJET_SENDER as string
 
 const NEWSLETTER_NAME = 'MicroSaaS Mailer'
 
-type ReceiverData = {
-    email: string
-    nickname: string
-}
-
-export const sendEmailGatewayFactory = () => {
+export const emailGatewayFactory = () => {
     const mailjet = Mailjet.apiConnect(API_KEY, SECRET_KEY)
     return {
-        sendTo: async ({ email, nickname }: ReceiverData) => {
+        sendWelcomeMessageTo: async ({ email, nickname }: SubscriberData) => {
+            const { subject, text, html } = welcomeEmailFactory(nickname)
+
             await mailjet
                 .post('send', { version: 'v3.1' })
                 .request({
@@ -28,14 +27,12 @@ export const sendEmailGatewayFactory = () => {
                                 Email: email,
                                 Name: nickname,
                             }],
-                            Subject: "MicroSaaS Mailer Disabled!",
-                            TextPart: "Hey you!\nMay the delivery force be with you!",
-                            HTMLPart: "<h3>Hey you! welcome to <a href=\"https://microsaasmaker.com/\">MicroSaaS Maker</a>!</h3><br />May the delivery force be with you!"
+                            Subject: subject,
+                            TextPart: text,
+                            HTMLPart: html,
                         }
                     ]
-                }, {}, false)
-
-            return { status: 'ok', message: '' }
+                }, {}, true)
         }
     }
 }

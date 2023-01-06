@@ -3,6 +3,7 @@ import { dataSource } from '../../driven/data/connexion/data-source'
 import { subscriberGatewayFactory } from '../../driven/gateways/subscriber'
 import { subscribeCommandHandler } from '../../core/handlers/subscribe'
 import { cryptoGatewayFactory } from '../../driven/gateways/crypto'
+import { emailGatewayFactory } from '../../driven/gateways/email'
 import { SubscriptionResponse } from '../../core/ports/subscription'
 import { UNKNOWN_ERROR_RESPONSE } from './constants'
 
@@ -15,7 +16,9 @@ const subscribeEndPoint = async (req: NextApiRequest, res: NextApiResponse<Subsc
 
         const cryptoGateway = cryptoGatewayFactory()
 
-        const result = await subscribeCommandHandler(subscriberGateway, cryptoGateway)(req.body)
+        const emailGateway = emailGatewayFactory()
+
+        const result = await subscribeCommandHandler(subscriberGateway, cryptoGateway, emailGateway)(req.body)
 
         res.status(200).json(result)
     } catch (error) {
